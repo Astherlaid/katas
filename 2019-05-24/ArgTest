@@ -1,0 +1,27 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ArgsKata;
+using System.Collections.Generic;
+
+namespace ArgsTestKata
+{
+    [TestClass]
+    public class ArgsTest
+    {
+        [TestMethod]
+        public void SeparateArgs()
+        {
+            string input = @"-d https://probando.com/";
+
+            var args = new Kata(input);
+
+            var result = args.RetrieveArgs();
+
+            var expectation = new List<string>()
+            {
+                "-d", " https://probando.com/"
+            };
+
+            Assert.IsTrue(result == expectation);
+        }
+    }
+}
