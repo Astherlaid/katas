@@ -1,0 +1,63 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Text;
+using AnagramKata2;
+using System.Linq;
+
+namespace KataTest
+{
+    [TestClass]
+    public class MyTestClass
+    {
+        [TestMethod]
+        public void Check_ReorderedWord()
+        {
+            var path = @"E:\Proyectos\Kata\Anagram\file.txt";
+
+            var data = "casa";
+            var wanted = "aacs";
+
+            var anagram = new AnagramKata(path);
+            var result = anagram.ReorderWord(data);
+
+            Assert.AreEqual(wanted, result);
+        }
+
+        [TestMethod]
+        public void Check_ReorderedWordList()
+        {
+            var path = @"E:\Proyectos\Kata\Anagram\file.txt";
+
+            string[] data = { "casa", "saca" };
+
+            var anagram = new AnagramKata(path);
+            var result = anagram.VerifyAnagram(data[0], data[1]);
+
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void Test_ReorderAllList()
+        {
+            var path = @"E:\Proyectos\Kata\Anagram\file.txt";
+
+            var anagram = new AnagramKata(path);
+            List<string> result = anagram.GetAnagramList();
+
+            Assert.AreEqual(true, true);
+        }
+
+        [TestMethod]
+        public void FillFile()
+        {
+            var path = @"E:\Proyectos\Kata\Anagram\file.txt";
+
+            var anagram = new AnagramKata(path);
+            var result = anagram.GetAnagramList();
+
+            
+
+            Assert.AreEqual(true, result);
+        }
+    }
+}
