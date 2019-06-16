@@ -1,0 +1,32 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AnagramKata3;
+using System.Collections.Generic;
+
+namespace AnagramTest
+{
+    [TestClass]
+    public class AnagramKataTest
+    {
+        [TestMethod]
+        public void Check_DeconstructedWord()
+        {
+            string path = @"E:\Proyectos\Kata\Anagram\file.txt";
+
+            var data = "casa";
+            var wanted = "aacs";
+
+            var anagram = new AnagramKata(path);
+            var result = anagram.ReorderWord(data);
+
+            Assert.AreEqual(wanted, result);
+        }
+
+        public void Check_DeconstrutedWordList()
+        {
+            string path = @"E:\Proyectos\Kata\Anagram\file.txt";
+
+            string[] data = { "casa", "saca", "asca" };
+            string wanted = "casa, saca, asca";
+        }
+    }
+}
