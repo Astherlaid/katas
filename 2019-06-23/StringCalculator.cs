@@ -1,45 +1,45 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace StringCalculator2
+namespace StringCalculatorKata
 {
     public class StringCalculator
     {
-        public string SumStringNumbers(string stringNumber)
+        public string SumNumbers(params string[] text)
         {
-            if (string.IsNullOrEmpty(stringNumber))
-                return "0";
+            string result = default;
 
-            if (stringNumber.EndsWith(","))
-                return "Number expected but EOF found.";
-
-            if(!stringNumber.ToCharArray().Any(x => x == ','))
-                return stringNumber;
-
-            double sumOfNumbers = default;
-            var numbers = stringNumber.Split(',', '\n');
-            var errorNumbers = new List<string>();
-
-            foreach (var number in numbers)
+            foreach(var numberCombination in text)
             {
-                if (Convert.ToDouble(number) < 0)
-                    errorNumbers.Add(number.ToString());
-                else
+                if (string.IsNullOrEmpty(numberCombination))
+                {
+                    result += "0, ";
+                    continue;
+                }
+
+                if (numberCombination.Substring(numberCombination.Length - 1) == ",")
+                {
+                    result += "Number expected but EOF found., ";
+                    continue;
+                }
+
+                if (!numberCombination.ToCharArray().Any(x => x == ','))
+                {
+                    result += $"{Convert.ToDouble(numberCombination)}, ";
+                    continue;
+                }
+
+                var numbers = numberCombination.Split(',', '\n');
+
+                double sumOfNumbers = default;
+
+                foreach (var number in numbers)
                     sumOfNumbers += Convert.ToDouble(number);
-            }
-            
-            if(errorNumbers.Count != 0)
-            {
-                string negativeNumbers = default;
 
-                foreach (var number in errorNumbers)
-                    negativeNumbers += number + ", ";
+                result += $"{sumOfNumbers}, ";
+            }            
 
-                return $"Negative not allowed : {negativeNumbers.Substring(0, negativeNumbers.Length - 2)}";
-            }
-
-            return sumOfNumbers.ToString();
+            return result.Substring(0,result.Length - 2);
         }
     }
 }
